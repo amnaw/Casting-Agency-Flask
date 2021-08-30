@@ -54,6 +54,31 @@ class Actor(db.Model):
       backref=db.backref('actors', lazy = 'joined', 
                                    cascade="all",
                                    passive_deletes=True))
+    
+    # methods to serialize model data
+    # helper methods to simplify API behavior as insert
+    def __init__(self, first_name, last_name, gender):
+      self.first_name = first_name
+      self.last_name = last_name
+      self.gender = gender
+
+    def insert(self):
+      db.session.add(self)
+      db.session.commit()
+  
+    def update(self):
+      db.session.commit()
+
+    def delete(self):
+      db.session.delete(self)
+      db.session.commit()
+
+    def format(self):
+      return {
+        'id': self.id,
+        'name': self.first_name + " " + self.last_name,
+        'gender': self.gender
+        }
 
 
 
@@ -72,6 +97,31 @@ class Movie(db.Model):
       backref=db.backref('artists', lazy = 'joined',
                                    cascade="all",
                                    passive_deletes=True))
+    
+    def __init__(self, title, release_date, rank):
+      self.title = title
+      self.release_date = release_date
+      self.rank = rank
+
+    def insert(self):
+      db.session.add(self)
+      db.session.commit()
+  
+    def update(self):
+      db.session.commit()
+
+    def delete(self):
+      db.session.delete(self)
+      db.session.commit()
+
+    def format(self):
+      return {
+        'id': self.id,
+        'title': self.title,
+        'release_date': self.release_date,
+        'rank': self.rank
+        }
+
       
 
 class Genre(db.Model):
@@ -79,6 +129,20 @@ class Genre(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     genre = db.Column(db.String())
+
+    def __init__(self, genre):
+      self.genre = genre
+
+    def insert(self):
+      db.session.add(self)
+      db.session.commit()
+  
+    def update(self):
+      db.session.commit()
+
+    def delete(self):
+      db.session.delete(self)
+      db.session.commit()
 
 
 class Assistant(db.Model):
@@ -88,7 +152,30 @@ class Assistant(db.Model):
     first_name = db.Column(db.String, nullable=False)
     last_name = db.Column(db.String(120), nullable=False)
     director_id = db.Column(db.Integer,db.ForeignKey('Director.id'), nullable=True)
-    
+
+    def __init__(self, first_name, last_name, director_id):
+      self.first_name = first_name
+      self.last_name = last_name
+      self.director_id = director_id
+
+    def insert(self):
+      db.session.add(self)
+      db.session.commit()
+  
+    def update(self):
+      db.session.commit()
+
+    def delete(self):
+      db.session.delete(self)
+      db.session.commit()
+
+    def format(self):
+      return {
+        'id': self.id,
+        'name': self.first_name + " " + self.last_name,
+        'director_id': self.director_id
+        }
+
 
 class Director(db.Model):
     __tablename__ = 'Director'
@@ -111,5 +198,28 @@ class Director(db.Model):
 
     # Relationship with Assistant - 1-M
     assistants =  db.relationship('Assistant', backref='director', lazy=True)
+
+    def __init__(self, first_name, last_name):
+      self.first_name = first_name
+      self.last_name = last_name
+
+    def insert(self):
+      db.session.add(self)
+      db.session.commit()
+  
+    def update(self):
+      db.session.commit()
+
+    def delete(self):
+      db.session.delete(self)
+      db.session.commit()
+
+    def format(self):
+      return {
+        'id': self.id,
+        'name': self.first_name + " " + self.last_name
+        }
+
+    
 
 
