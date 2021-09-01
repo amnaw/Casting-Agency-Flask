@@ -5,8 +5,26 @@ import os
 from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import json
+from flask_migrate import Migrate
+
+database_name = "CastingAgencydb"
+database_path = "postgres://{}/{}".format('postgres:Aa123456@localhost:5432', database_name)
 
 db = SQLAlchemy()
+
+'''
+setup_db(app)
+    binds a flask application and a SQLAlchemy service
+'''
+def setup_db(app, database_path=database_path):
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    db.app = app
+    db.init_app(app)
+    #db.create_all()
+    # Use the Migrate class to link up flask app + sqlAlchmy db
+    migrate = Migrate(app, db)
+
 
 #----------------------------------------------------------------------------#
 # Models
@@ -27,18 +45,16 @@ actor_movies = db.Table('role',
 )
 
 # Associative table M-M relationship     
-director_movies = db.Table('role',
+director_movies = db.Table('director_movies',
     db.Column('director_id', db.Integer, db.ForeignKey('Director.id'), primary_key=True),
     db.Column('movie_id', db.Integer, db.ForeignKey('Movie.id'), primary_key=True)
 )
 
 # Associative table M-M relationship 
-director_genres = = db.Table('directo_genres',
-    db.Column('directo_id', db.Integer, db.ForeignKey('Directo.id'), primary_key=True),
+director_genres = db.Table('directo_genres',
+    db.Column('directo_id', db.Integer, db.ForeignKey('Director.id'), primary_key=True),
     db.Column('genre_id', db.Integer, db.ForeignKey('Genre.id'), primary_key=True)
 )
-
-
 
 
 class Actor(db.Model):
@@ -81,8 +97,6 @@ class Actor(db.Model):
         }
 
 
-
-
 class Movie(db.Model):
     __tablename__ = 'Movie'
 
@@ -121,8 +135,7 @@ class Movie(db.Model):
         'release_date': self.release_date,
         'rank': self.rank
         }
-
-      
+     
 
 class Genre(db.Model):
     __tablename__ = 'Genre'
