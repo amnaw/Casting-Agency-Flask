@@ -38,13 +38,13 @@ def create_app(test_config=None):
     def get_actors(payload):
       try:
         actorsTuple = Actor.query.order_by(Actor.id).all()
-        actors_dic = [actor.format() for actor in actorsTuple]
+        actors = [actor.format() for actor in actorsTuple]
       except:
         abort(422)
 
       return jsonify({
             'success': True,
-            'actors': actors_dic
+            'actors': actors
             }), 200
   
   # GET movies
@@ -52,11 +52,11 @@ def create_app(test_config=None):
     @requires_auth('get:movies')
     def get_movies(payload):
       moviesTuple = Movie.query.order_by(Movie.id).all()
-      movies_dic = [movie.format() for movie in moviesTuple]
+      movies = [movie.format() for movie in moviesTuple]
 
       return jsonify({
             'success': True,
-            'movies': movies_dic
+            'movies': movies
             }), 200
   
   # DELETE actor
@@ -99,13 +99,12 @@ def create_app(test_config=None):
     @app.route('/actors', methods=['POST'])
     @requires_auth('post:actor')
     def create_actor(payload):
-        body = request.get_json()
-
-        first_name = body.get('first_name', None)
-        last_name = body.get('last_name', None)
-        gender = body.get('gender', None)
-
         try:
+          body = request.get_json()
+          first_name = body.get('first_name', None)
+          last_name = body.get('last_name', None)
+          gender = body.get('gender', None)
+
           new_actor = Actor(
           first_name=first_name, 
           last_name=last_name, 
@@ -117,7 +116,7 @@ def create_app(test_config=None):
             'success': True,
             'actor_id': new_actor.id,
             'total_actors': len(Actor.query.all())
-          })
+          }), 200
         
         except:
             abort(422)
@@ -126,13 +125,13 @@ def create_app(test_config=None):
     @app.route('/movies', methods=['POST'])
     @requires_auth('post:movie')
     def create_movie(payload):
-        body = request.get_json()
-
-        title = body.get('title', None)
-        release_date = body.get('release_date', None)
-        rank = body.get('rank', None)
-
         try:
+          body = request.get_json()
+
+          title = body.get('title', None)
+          release_date = body.get('release_date', None)
+          rank = body.get('rank', None)
+
           new_movie = Movie(
           title=title, 
           release_date=release_date, 
@@ -144,7 +143,7 @@ def create_app(test_config=None):
             'success': True,
             'movie_id': new_movie.id,
             'total_movies': len(Movie.query.all())
-          })
+          }), 200
         
         except:
             abort(422)
@@ -153,13 +152,12 @@ def create_app(test_config=None):
     @app.route('/actors/<int:id>/edit', methods=['PATCH'])
     @requires_auth('patch:actor')
     def edit_actor(payload, id):
-        body = request.get_json()
-
-        first_name = body.get('first_name', None)
-        last_name = body.get('last_name', None)
-        gender = body.get('gender', None)
-
         try:
+          body = request.get_json()
+          first_name = body.get('first_name', None)
+          last_name = body.get('last_name', None)
+          gender = body.get('gender', None)
+
           # get actor id
           actor = Actor.query.filter(Actor.id == id).one_or_none()
           if actor is None:
@@ -174,13 +172,13 @@ def create_app(test_config=None):
              actor.gender = gender
           
           # save the update
-          actor.update()
-
-          return jsonify({
-            'success': True,
-            'actor_id': actor.id,
-            'total_actors': len(Actor.query.all())
-          })
+          if first_name or last_name or gender:
+            actor.update()
+            return jsonify({
+              'success': True,
+              'actor_id': actor.id,
+              'total_actors': len(Actor.query.all())
+            }), 200
         
         except:
             abort(422)
@@ -189,13 +187,13 @@ def create_app(test_config=None):
     @app.route('/movies/<int:id>/edit', methods=['PATCH'])
     @requires_auth('patch:movie')
     def edit_movie(payload, id):
-        body = request.get_json()
-
-        title = body.get('title', None)
-        release_date = body.get('release_date', None)
-        rank = body.get('rank', None)
-
         try:
+          body = request.get_json()
+
+          title = body.get('title', None)
+          release_date = body.get('release_date', None)
+          rank = body.get('rank', None)
+
           movie = Movie.query.filter(Movie.id == id).one_or_none()
           if movie is None:
             abort(404)
@@ -208,13 +206,13 @@ def create_app(test_config=None):
             movie.rank = rank
           
           # save the update
-          movie.update()
-
-          return jsonify({
-            'success': True,
-            'movie_id': movie.id,
-            'total_movies': len(Movie.query.all())
-          })
+          if title or release_date or rank:
+            movie.update()
+            return jsonify({
+              'success': True,
+              'movie_id': movie.id,
+              'total_movies': len(Movie.query.all())
+            }), 200
         
         except:
             abort(422)
@@ -269,6 +267,14 @@ def create_app(test_config=None):
             "error": 401,
             "message": "Unauthorized"   
             }), 401
+    
+    @app.errorhandler(403)
+    def unauthorized_error(error):
+        return jsonify({
+            "success": False, 
+            "error": 403,
+            "message": "Forbidden"   
+            }), 403
 
     @app.errorhandler(AuthError)
     def auth_error(error):
