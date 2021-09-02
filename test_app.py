@@ -301,7 +301,6 @@ class TestCase(unittest.TestCase):
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], 'Forbidden')
 
-
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
