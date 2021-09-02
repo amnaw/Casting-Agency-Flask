@@ -23,6 +23,7 @@ class AuthError(Exception):
 def get_token_auth_header():
     auth_header = request.headers.get('Authorization', None)
     if auth_header is None:
+        print("ZZZZZZZZZZZZZZZZZZZ=11111111")
         raise AuthError({
             'code': 'authorization_header_missing',
             'description': 'Authorization header is expected within the request.'
@@ -69,6 +70,7 @@ def verify_decode_jwt(token):
     
     rsa_key = {}
     if 'kid' not in unverified_header:
+        print("ZZZZZZZZZZZZZZZZZZZ")
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization malformed.'
