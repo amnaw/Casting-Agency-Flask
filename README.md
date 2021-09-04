@@ -22,14 +22,14 @@ The Casting Agency models a company that is responsible for creating movies and 
 
 #### Roles:
 1. Casting Assistant
-    Can view actors and movies
+    - Can view actors and movies
 2. Casting Director
-    All permissions a Casting Assistant has and…
-    Add or delete an actor from the database
-    Modify actors or movies
+    - All permissions a Casting Assistant has and…
+    - Add or delete an actor from the database
+    - Modify actors or movies
 3. Executive Producer
-    All permissions a Casting Director has and…
-    Add or delete a movie from the database
+    - All permissions a Casting Director has and…
+    - Add or delete a movie from the database
 
 
 #### Tests:
