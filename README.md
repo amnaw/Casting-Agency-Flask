@@ -46,6 +46,7 @@ follow this [link](https://dev-04zvrt8l.us.auth0.com/authorize?audience=Casting-
 - assistant@casting.agency.com
 
 passwoed: Password1*
+
 The password is the same for all.
 
 
