@@ -46,13 +46,13 @@ Follow this [link](https://dev-04zvrt8l.us.auth0.com/authorize?audience=Casting-
 
 1. Casting Assistant
     - assistant@casting.agency.com
-    - [24h Token](https://github.com/amnaw/Casting-Agency-Flask/blob/main/Casting-Assistant-Token.txt)
+    - [24h Token](https://github.com/amnaw/Casting-Agency-Flask/blob/main/Casting%20Assistant%20Token.txt)
 2. Casting Director
     - director@casting.agency.com
-    - [24h Token](https://github.com/amnaw/Casting-Agency-Flask/blob/main/Casting-Director-Token.txt)
+    - [24h Token](https://github.com/amnaw/Casting-Agency-Flask/blob/main/Casting%20Director%20Token.txt)
 3. Executive Producer
     - producer@casting.agency.com
-    - [24h Token](https://github.com/amnaw/Casting-Agency-Flask/blob/main/Executive-Producer-Token.txt)
+    - [24h Token](https://github.com/amnaw/Casting-Agency-Flask/blob/main/Executive%20Producer%20Token.txt)
 
 passwoed: Password1*
 
