@@ -40,13 +40,19 @@ The Casting Agency models a company that is responsible for creating movies and 
 
 ### Try it out:
 Authentication Instructions:
-there are pre-defined users accounts each of which associated with one role, to authenticate refer to their credentials to login and try different endpoints using [Postman](https://www.postman.com/).
+there are pre-defined users accounts each of which associated with one role, to authenticate refer to their credentials to login or the Tokens and try different endpoints using [Postman](https://www.postman.com/).
 
 Follow this [link](https://dev-04zvrt8l.us.auth0.com/authorize?audience=Casting-Agency&response_type=token&client_id=im6QhIeQHzMYvYXFRreaakuhUutPdmlF&redirect_uri=https://casting-agency-flask.herokuapp.com/) to login
 
-- producer@casting.agency.com
-- director@casting.agency.com
-- assistant@casting.agency.com
+1. Casting Assistant
+    - assistant@casting.agency.com
+    - [24h Token](https://github.com/amnaw/Casting-Agency-Flask/blob/main/Casting-Assistant-Token.txt)
+2. Casting Director
+    - director@casting.agency.com
+    - [24h Token](https://github.com/amnaw/Casting-Agency-Flask/blob/main/Casting-Director-Token.txt)
+3. Executive Producer
+    - producer@casting.agency.com
+    - [24h Token](https://github.com/amnaw/Casting-Agency-Flask/blob/main/Executive-Producer-Token.txt)
 
 passwoed: Password1*
 
