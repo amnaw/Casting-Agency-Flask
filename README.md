@@ -41,7 +41,8 @@ The Casting Agency models a company that is responsible for creating movies and 
 ### Try it out:
 Authentication Instructions:
 there are pre-defined users accounts each of which associated with one role, to authenticate refer to their credentials to login and try different endpoints using [Postman](https://www.postman.com/).
-follow this [link](https://dev-04zvrt8l.us.auth0.com/authorize?audience=Casting-Agency&response_type=token&client_id=im6QhIeQHzMYvYXFRreaakuhUutPdmlF&redirect_uri=https://casting-agency-flask.herokuapp.com/) to login
+
+Follow this [link](https://dev-04zvrt8l.us.auth0.com/authorize?audience=Casting-Agency&response_type=token&client_id=im6QhIeQHzMYvYXFRreaakuhUutPdmlF&redirect_uri=https://casting-agency-flask.herokuapp.com/) to login
 
 - producer@casting.agency.com
 - director@casting.agency.com
