@@ -36,7 +36,7 @@ The Casting Agency models a company that is responsible for creating movies and 
 - At least two tests of RBAC for each role
 
 
-#### Try it out:
+### Try it out:
 Authentication Instructions:
 there are pre-defined users accounts each of which associated with one role, to authenticate refer to their credentials to login and try different endpoints using [Postman](https://www.postman.com/).
 follow this [link](https://dev-04zvrt8l.us.auth0.com/authorize?audience=Casting-Agency&response_type=token&client_id=im6QhIeQHzMYvYXFRreaakuhUutPdmlF&redirect_uri=https://casting-agency-flask.herokuapp.com/) to login
