@@ -10,6 +10,8 @@ The Casting Agency models a company that is responsible for creating movies and 
 4. Assistant
 5. Director
 
+![ERD](https://github.com/amnaw/Casting-Agency-Flask/blob/main/ERD.PNG)
+
 
 #### Endpoints:
 1. GET /actors and /movies
